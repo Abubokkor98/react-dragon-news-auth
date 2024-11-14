@@ -15,7 +15,8 @@ export default function Navbar() {
         <div className="">
           <img src={userIcon} alt="" />
         </div>
-        <button className="btn btn-neutral rounded-none w-[140px]">Login</button>
+        {/* <button className="btn btn-neutral rounded-none w-[140px]">Login</button> */}
+        <Link to={'/auth/login'} className="btn btn-neutral rounded-none w-[140px]">Login</Link>
       </div>
     </div>
   );
