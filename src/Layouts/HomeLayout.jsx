@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../Components/Header";
 import LatestNews from "../Components/LatestNews";
 import Navbar from "../Components/Navbar";
+import LeftNavbar from "../Components/layout-component/LeftNavbar";
 
 export default function HomeLayout() {
   return (
@@ -19,7 +20,7 @@ export default function HomeLayout() {
         </nav>
         {/* main content */}
         <main className="w-11/12 mx-auto pt-5 grid md:grid-cols-12">
-        <aside className="col-span-3">Left Content</aside>
+        <aside className="col-span-3"><LeftNavbar></LeftNavbar></aside>
         <section className="col-span-6">Main Content</section>
         <aside className="col-span-3">Right Content</aside>
         </main>
