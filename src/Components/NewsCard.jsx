@@ -1,6 +1,7 @@
 import { AiFillStar } from "react-icons/ai";
 import { FaEye, FaShareAlt } from "react-icons/fa";
 import { FiBookmark } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const NewsCard = ({ news }) => {
   const { author, title, image_url, details, rating, total_view } = news;
@@ -25,8 +26,8 @@ const NewsCard = ({ news }) => {
         alt="Thumbnail"
         className="w-full h-[262px] object-cover rounded-lg mb-4"
       />
-      <p className="text-gray-500 text-sm mb-4">{details}</p>
-      <button className="text-primary underline mb-4">Read More</button>
+      <p className="text-gray-500 text-sm mb-4">{details.slice(0,280)}</p>
+      <Link to={`/news/${news._id}`} className="text-primary underline mb-4">Read More</Link>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           {[...Array(5)].map((_, i) => (
