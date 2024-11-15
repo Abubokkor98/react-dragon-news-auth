@@ -8,7 +8,7 @@ export default function Navbar() {
   const {user} = useContext(AuthContext);
   return (
     <div className="flex justify-between">
-      <div>{user.name}</div>
+      <div>{user && user.name}</div>
       <div className="space-x-5">
         <Link to={"/"}>Home</Link>
         <Link to={"/about"}>About</Link>
