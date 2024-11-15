@@ -5,7 +5,7 @@ import { FiBookmark } from "react-icons/fi";
 const NewsCard = ({ news }) => {
   const { author, title, image_url, details, rating, total_view } = news;
   return (
-    <div className="p-4 bg-white rounded-lg shadow-lg">
+    <div className="p-4 bg-white rounded-lg">
       <div className="flex justify-between mb-4">
         <div className="flex space-x-3 items-center">
         <img src={author.img} alt="Author" className="w-10 h-10 rounded-full" />
