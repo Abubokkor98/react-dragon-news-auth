@@ -1,38 +1,43 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 export default function Register() {
-  const { createNewUser, setUser } = useContext(AuthContext);
+  const { createNewUser, setUser, updateUserprofile } = useContext(AuthContext);
   const [error, setError] = useState({});
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
-    setError('');
+    setError("");
     e.preventDefault();
     // get form data
     const form = new FormData(e.target);
     const name = form.get("name");
-    if(name.length <5 ){
-      setError({...error, name:'Name must be more than 5character long'})
+    if (name.length < 5) {
+      setError({ ...error, name: "Name must be more than 5character long" });
       return;
     }
     const email = form.get("email");
     const photo = form.get("photo");
     const password = form.get("password");
 
-   
-
     // call context function
     createNewUser(email, password)
       .then((result) => {
         const user = result.user;
-        setUser(user)
-        console.log(user);
+        setUser(user);
+        updateUserprofile({ displayName: name, photoURL: photo })
+        .then(()=>{
+          navigate('/');
+        })
+        .catch(err=>{
+          console.log(err);
+        })
       })
       .catch((err) => {
         const errorCode = err.code;
         const errorMessage = err.message;
-        console.log({errorCode,errorMessage});
+        console.log({ errorCode, errorMessage });
       });
   };
 
@@ -55,11 +60,7 @@ export default function Register() {
               className="input input-bordered"
               required
             />
-            {
-              error.name && (
-                <p className="text-xs text-red-600">{error.name}</p>
-              )
-            }
+            {error.name && <p className="text-xs text-red-600">{error.name}</p>}
           </div>
           {/* photo input */}
           <div className="form-control">

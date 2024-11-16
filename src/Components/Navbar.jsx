@@ -25,7 +25,12 @@ export default function Navbar() {
       </div>
       <div className="flex gap-2 items-center">
         <div className="">
-          <img src={userIcon} alt="" />
+          {
+            user && user?.email ? <div>
+              <img className="h-[40px w-[40px] rounded-full" src={user.photoURL} alt="" />
+              <p>{user.displayName.slice(0,3)}</p>
+            </div> : <img src={userIcon} alt="" />
+          }
         </div>
         {/* <button className="btn btn-neutral rounded-none w-[140px]">Login</button> */}
         {

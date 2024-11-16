@@ -61,7 +61,7 @@ export default function Login() {
             />
             {
               error.login && (
-                <p className="text-red-600">{error.login}</p>
+                <p className="text-red-600 text-xs">{error.login}</p>
               )
             }
             <label className="label">
