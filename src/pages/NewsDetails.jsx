@@ -12,7 +12,7 @@ export default function NewsDetails() {
       <header>
         <Header></Header>
       </header>
-      <main className="w-11/12 mx-auto border border-red-400 grid grid-cols-12 gap-5">
+      <main className="w-11/12 mx-auto grid grid-cols-12 gap-5">
         <section className="col-span-9">
           <h1 className="font-semibold mb-3">Dragon News</h1>
           <div className="card card-compact bg-base-100 ">

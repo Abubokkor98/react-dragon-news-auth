@@ -14,20 +14,24 @@ const auth = getAuth(app);
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  console.log(user);
+  const [loading, setLoading] = useState(true);
+  console.log(loading, user);
 
   // for registerUser
   const createNewUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   //   for logout user
-  const logOut = () =>{
+  const logOut = () => {
+    setLoading(true);
     return signOut(auth);
-  }
-//   for sign-in a existing user
-const logIn = (email, password)=>{
-    return signInWithEmailAndPassword(auth, email,password);
-}
+  };
+  //   for sign-in a existing user
+  const logIn = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
   const userInfo = {
     user,
@@ -35,11 +39,13 @@ const logIn = (email, password)=>{
     createNewUser,
     logOut,
     logIn,
+    loading,
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
     return () => {
       unsubscribe();
