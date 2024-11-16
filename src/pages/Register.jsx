@@ -1,20 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 export default function Register() {
   const { createNewUser, setUser } = useContext(AuthContext);
+  const [error, setError] = useState({});
 
   const handleRegister = (e) => {
+    setError('');
     e.preventDefault();
     // get form data
     const form = new FormData(e.target);
     const name = form.get("name");
+    if(name.length <5 ){
+      setError({...error, name:'Name must be more than 5character long'})
+      return;
+    }
     const email = form.get("email");
     const photo = form.get("photo");
     const password = form.get("password");
-    console.log(form);
-    console.log({ name, email, photo, password });
+
+   
 
     // call context function
     createNewUser(email, password)
@@ -23,10 +29,10 @@ export default function Register() {
         setUser(user)
         console.log(user);
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log({ errorCode, errorMessage });
+      .catch((err) => {
+        const errorCode = err.code;
+        const errorMessage = err.message;
+        console.log({errorCode,errorMessage});
       });
   };
 
@@ -49,6 +55,11 @@ export default function Register() {
               className="input input-bordered"
               required
             />
+            {
+              error.name && (
+                <p className="text-xs text-red-600">{error.name}</p>
+              )
+            }
           </div>
           {/* photo input */}
           <div className="form-control">
