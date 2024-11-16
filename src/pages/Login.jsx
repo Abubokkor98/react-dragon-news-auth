@@ -7,7 +7,7 @@ export default function Login() {
   const [error, setError] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
-  console.log({location, navigate});
+ 
 
   const handleSubmit = (e) => {
     setError('');
@@ -22,7 +22,7 @@ export default function Login() {
         const user = result.user;
         setUser(user);
         navigate(location?.state ? location.state : '/')
-        console.log(user);
+
       })
       .catch((err) => {
         setError({...error, login: err.message});
